@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1f3a8a">
+<title>Cap sur mes 40 ans</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+</head>
+<body>
+<div class="wrap">
+  <div class="authbar toolbar" id="authbar"></div>
+  <nav class="tabs" role="tablist" aria-label="Vues">
+    <button class="tab" role="tab" id="tab-route" aria-controls="view-route" aria-selected="true" type="button">Feuille de route</button>
+    <button class="tab" role="tab" id="tab-spirituel" aria-controls="view-spirituel" aria-selected="false" type="button">Suivi spirituel</button>
+  </nav>
+
+  <!-- ===================== VUE 1 : FEUILLE DE ROUTE ===================== -->
+  <div id="view-route" role="tabpanel" aria-labelledby="tab-route">
+  <header class="hero">
+    <div class="forty" aria-hidden="true">40</div>
+    <div>
+      <p class="eyebrow">Jean Philippe · Octobre 2026 → Mai 2031</p>
+      <h1>Cap sur mes 40 ans</h1>
+      <p class="sub">Sept chantiers à accomplir d'ici mai 2031 : Chill&amp;Gospel, JEXCELLENCE, l'implantation d'églises, la salle, la profondeur spirituelle, enseignant biblique sur les finances et la nationalité française.</p>
+      <div class="stats">
+        <div class="stat"><b id="monthsLeft">–</b><span>mois avant mai 2031</span></div>
+        <div class="stat"><b id="msDone">0 / 0</b><span>jalons accomplis</span></div>
+        <div class="stat"><b>7</b><span>chantiers en cours</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-goals">
+    <p class="eyebrow">Partie 1</p>
+    <h2 id="t-goals">Ce que je bâtis d'octobre 2026 à mai 2031</h2>
+    <p class="intro muted">Sept chantiers. Six sont découpés en jalons à cocher ; la profondeur spirituelle se mesure chaque année dans le suivi spirituel. Le calendrier détaillé de la nationalité suit plus bas.</p>
+    <div class="progress"><div class="bar"><i id="barFill"></i></div><span class="muted" id="barText" style="font-size:.85rem"></span></div>
+    <div class="goals" id="goals"></div>
+  </section>
+
+  <section aria-labelledby="t-nat">
+    <p class="eyebrow">Partie 2 · Le détail d'un chantier</p>
+    <h2 id="t-nat">Le chantier de la nationalité</h2>
+    <p class="intro muted">Naturalisation par décret. Avec plus de 10 ans de résidence habituelle en France, l'administration a 12 mois après le récépissé de complétude pour répondre, prolongeables une seule fois de 3 mois par décision motivée.</p>
+
+    <div class="gantt-scroll" role="img" aria-label="Frise des mois d'octobre 2026 à mai 2031 avec les étapes de la naturalisation">
+      <div class="gantt" id="gantt"></div>
+    </div>
+
+    <ol class="steps">
+      <li class="step"><div class="when">Oct. 2026</div><div class="pin"><i></i></div><div class="body"><strong>Obtenir la carte de résident <span class="tag add">En attente</span></strong><p>Le point de départ de tout le plan.</p></div></li>
+      <li class="step"><div class="when">Juin 2027 → Mai 2028</div><div class="pin"><i></i></div><div class="body"><strong>Préparation du dossier avec l'avocat</strong><p>Vérifier les conditions (résidence, ressources, intégration), bâtir la stratégie du dossier.</p></div></li>
+      <li class="step added"><div class="when">Juil. 2028</div><div class="pin"><i></i></div><div class="body"><strong>Examen civique <span class="tag add">Avant le dépôt</span></strong><p>40 questions, 32/40 requis. L'attestation de réussite fait partie du dossier. Le diplôme d'ingénieur ne dispense pas de cet examen.</p></div></li>
+      <li class="step"><div class="when">Juin → Juil. 2028</div><div class="pin"><i></i></div><div class="body"><strong>Toutes les pièces justificatives réunies</strong><p>État civil, avis d'imposition, justificatifs de ressources et de résidence, copie du diplôme d'ingénieur comme justificatif du niveau B2, attestation de l'examen civique.</p></div></li>
+      <li class="step done"><div class="when">Déjà acquis</div><div class="pin"><i></i></div><div class="body"><strong>Niveau de français B2 <span class="tag ok">Diplôme</span></strong><p>Le diplôme d'ingénieur obtenu en France sert de justificatif : l'arrêté du 22 décembre 2025 accepte les diplômes d'État et les certifications RNCP de niveau 3 ou plus. Pas besoin de passer le TCF ou le TEF. À faire confirmer par l'avocat.</p></div></li>
+      <li class="step"><div class="when">Août 2028</div><div class="pin"><i></i></div><div class="body"><strong>Dépôt de la demande sur l'ANEF</strong></div></li>
+      <li class="step"><div class="when">Fév. 2029</div><div class="pin"><i></i></div><div class="body"><strong>Confirmation de dépôt</strong></div></li>
+      <li class="step"><div class="when">Fév. 2030</div><div class="pin"><i></i></div><div class="body"><strong>Récépissé de complétude</strong><p>Le délai légal de 12 mois démarre ici.</p></div></li>
+      <li class="step"><div class="when">2030</div><div class="pin"><i></i></div><div class="body"><strong>Entretien d'assimilation</strong><p>Entretien en préfecture sur le parcours, les valeurs et la vie en France. Il est distinct de l'examen civique.</p></div></li>
+      <li class="step"><div class="when">Fév. 2031</div><div class="pin"><i></i></div><div class="body"><strong>Fin du délai légal de 12 mois</strong></div></li>
+      <li class="step final"><div class="when">Mai 2031</div><div class="pin"><i></i></div><div class="body"><strong>Je suis français</strong><p>Au plus tard, avec la prolongation de 3 mois. Sans réponse à cette date, le silence vaut refus implicite et ouvre un recours devant le tribunal administratif de Nantes.</p></div></li>
+    </ol>
+
+    <div class="note"><b>Un écart avec le plan initial</b><p>L'examen civique était prévu après le récépissé. Les règles en vigueur depuis 2026 le placent avant le dépôt. Le niveau B2, lui, est couvert par ton diplôme d'ingénieur. L'examen est donc fixé en juillet 2028, juste avant le dépôt d'août. Garde une date de repli en cas d'échec, sinon le dépôt glisse.</p></div>
+  </section>
+
+  <section aria-labelledby="t-vision">
+    <div class="vision">
+      <div style="display:grid;gap:10px">
+        <p class="eyebrow">Partie 3 · À 40 ans, français et ces objectifs accomplis</p>
+        <h2 id="t-vision">Ce que je deviens</h2>
+      </div>
+      <div class="callings">
+        <div class="calling"><small>Préparé par Chill&amp;Gospel</small><h3>Évangéliste par la louange</h3><p>La louange comme porte d'entrée de l'Évangile, au-delà des murs de l'église.</p></div>
+        <div class="calling"><small>Préparé par JEXCELLENCE et le module finances</small><h3>Ministre de don et auteur</h3><p>Donner largement et écrire un livre de témoignage et d'application des enseignements du frère Théodore.</p></div>
+        <div class="calling"><small>Préparé par l'implantation d'églises</small><h3>Dirigeant de 1000 personnes</h3><p>5 églises en France, 20 assemblées de maison en Île-de-France, des responsables formés.</p></div>
+        <div class="calling"><small>Préparé par la profondeur spirituelle et la salle</small><h3>Pasteur à temps plein</h3><p>Une activité qui tourne sans moi au quotidien, un lieu de culte, un cœur prêt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Règles de naturalisation vérifiées en octobre 2026 (loi du 26 janvier 2024, décret n° 2025-648, arrêté du 22 décembre 2025) : niveau B2, examen civique, délai de 12 mois pour plus de 10 ans de résidence. Les délais réels en Île-de-France dépassent souvent le délai légal ; à confirmer avec l'avocat. Les jalons annuels sont des propositions à ajuster.</footer>
+  </div>
+
+  <!-- ===================== VUE 2 : SUIVI SPIRITUEL ===================== -->
+  <div id="view-spirituel" role="tabpanel" aria-labelledby="tab-spirituel" hidden>
+    <header class="sp-head">
+      <p class="eyebrow">Profondeur spirituelle et cœur large · minimum chaque année</p>
+      <h1>Suivi spirituel <span id="spYear">2026</span></h1>
+      <div class="toolbar">
+        <div class="toolbar" id="yearChips" role="group" aria-label="Année"></div>
+        <span class="sync" id="sync">Chargement…</span>
+      </div>
+      <p class="muted" id="periodNote" style="font-size:.85rem"></p>
+    </header>
+
+    <section aria-labelledby="t-jour">
+      <h2 id="t-jour">Journal du jour</h2>
+      <div class="day-grid">
+        <div class="panel" id="dayPanel">
+          <div class="datenav">
+            <button class="iconbtn" id="prevDay" type="button" aria-label="Jour précédent">‹</button>
+            <input type="date" id="dayInput" aria-label="Date du journal" min="2026-01-01" max="2031-12-31">
+            <button class="iconbtn" id="nextDay" type="button" aria-label="Jour suivant">›</button>
+            <button class="btn ghost small" id="todayBtn" type="button">Aujourd'hui</button>
+          </div>
+          <p class="dlabel" id="dayLabel"></p>
+
+          <div>
+            <div class="grp">1 · Méditation</div>
+            <div class="frow"><div class="lbl">RDQD fait<small>Objectif : 300 dans l'année</small></div><div class="ctl"><button class="tgl" id="f-r" type="button" aria-pressed="false">Non</button></div></div>
+
+            <div class="grp">2 · Lecture biblique</div>
+            <div class="frow"><div class="lbl">Chapitres lus<small>10 par jour pour 3 lectures complètes</small></div><div class="ctl"><input class="num" type="number" min="0" max="300" inputmode="numeric" id="f-ch"><span class="unit">/ 10</span><button class="chip" type="button" id="q-ch">+10</button></div></div>
+
+            <div class="grp">3 · Prière seule · 2 h 30</div>
+            <div class="frow"><div class="lbl">Pour Amanda et Azaï</div><div class="ctl"><input class="num" type="number" min="0" max="600" inputmode="numeric" id="f-pf"><span class="unit">/ 30 min</span><button class="chip" type="button" data-fill="f-pf">30</button></div></div>
+            <div class="frow"><div class="lbl">Pour les disciples</div><div class="ctl"><input class="num" type="number" min="0" max="600" inputmode="numeric" id="f-pd"><span class="unit">/ 30 min</span><button class="chip" type="button" data-fill="f-pd">30</button></div></div>
+            <div class="frow"><div class="lbl">Ministre de dons et administrateur</div><div class="ctl"><input class="num" type="number" min="0" max="600" inputmode="numeric" id="f-pm"><span class="unit">/ 30 min</span><button class="chip" type="button" data-fill="f-pm">30</button></div></div>
+            <div class="frow"><div class="lbl">Retraites de 15 min<small>4 par jour = 1 h</small></div><div class="ctl quart" id="f-rt"><button type="button" aria-pressed="false" aria-label="Retraite 1">15'</button><button type="button" aria-pressed="false" aria-label="Retraite 2">15'</button><button type="button" aria-pressed="false" aria-label="Retraite 3">15'</button><button type="button" aria-pressed="false" aria-label="Retraite 4">15'</button></div></div>
+
+            <div class="grp">4 · En famille</div>
+            <div class="frow"><div class="lbl">Culte matinal / LB avec Azaï<small>20 min · objectif : 250 dans l'année</small></div><div class="ctl"><button class="tgl" id="f-cu" type="button" aria-pressed="false">Non</button></div></div>
+
+            <div class="grp">7 · Sevrage</div>
+            <div class="frow"><div class="lbl">Journée sans sucre<small>Préalable aux jeûnes</small></div><div class="ctl"><button class="tgl" id="f-ss" type="button" aria-pressed="false">Non</button></div></div>
+
+            <div class="grp">Pour le compte rendu</div>
+            <div class="frow"><div class="lbl">Livre biblique en cours (LB)<small>Reste d'un jour à l'autre</small></div><div class="ctl"><input class="txt" type="text" id="f-lbk" maxlength="40"></div></div>
+            <div class="frow"><div class="lbl">Livre chrétien en cours (LLC)</div><div class="ctl"><input class="txt" type="text" id="f-llt" maxlength="80" aria-label="Titre du livre"></div></div>
+            <div class="frow"><div class="lbl"><small>Chapitre ou page atteint, sur le total</small></div><div class="ctl"><input class="num" type="number" min="0" inputmode="numeric" id="f-llp" aria-label="Chapitre ou page atteint"><span class="unit" style="min-width:0">/</span><input class="num" type="number" min="0" inputmode="numeric" id="f-lln" aria-label="Total"></div></div>
+            <div class="frow"><div class="lbl">Prière en groupe (PG)<small>Les réunions du registre à cette date s'ajoutent seules</small></div><div class="ctl"><input class="txt" type="text" id="f-pg" maxlength="120" placeholder="Croisade Jour 11"></div></div>
+            <div class="frow"><div class="lbl">Confession des péchés</div><div class="ctl"><button class="tgl" id="f-cf" type="button" aria-pressed="false">Non</button></div></div>
+            <div class="frow"><div class="lbl">Évangélisation<small>Personnes évangélisées</small></div><div class="ctl"><input class="num" type="number" min="0" inputmode="numeric" id="f-evg"></div></div>
+            <div class="frow"><div class="lbl">Jeûne en cours<small>Jour atteint, sur la durée prévue</small></div><div class="ctl"><input class="num" type="number" min="0" inputmode="numeric" id="f-jd" aria-label="Jour de jeûne"><span class="unit" style="min-width:0">/</span><input class="num" type="number" min="0" inputmode="numeric" id="f-jn" aria-label="Durée du jeûne"><button class="chip" type="button" id="q-jd" title="Reprend le jeûne d'hier avec un jour de plus">+1</button></div></div>
+          </div>
+
+          <div class="sumline" id="daySum"></div>
+          <label for="f-n" class="muted" style="font-size:.8rem">Note du jour (ce que Dieu a dit, sujets de prière, exaucements)</label>
+          <textarea id="f-n"></textarea>
+
+          <div class="wa">
+            <div class="wa-head"><b>Compte rendu WhatsApp</b><button class="btn small" type="button" id="waCopy">Copier</button></div>
+            <textarea id="waText" readonly rows="18" aria-label="Compte rendu à copier"></textarea>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="cal-head">
+            <button class="iconbtn" id="prevMonth" type="button" aria-label="Mois précédent">‹</button>
+            <b id="calTitle"></b>
+            <button class="iconbtn" id="nextMonth" type="button" aria-label="Mois suivant">›</button>
+          </div>
+          <div class="cal" id="cal"></div>
+          <div class="legend"><span><i></i>rien</span><span><i class="l1"></i>commencé</span><span><i class="l2"></i>plus de la moitié</span><span><i class="l3"></i>journée complète</span></div>
+          <p class="muted" style="font-size:.78rem">Journée complète = RDQD, 10 chapitres et 2 h 30 de prière seule.</p>
+          <div class="sumline" id="monthSum"></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-bilan">
+      <h2 id="t-bilan">Bilan de l'année</h2>
+      <p class="intro muted">Le trait sombre sur chaque barre marque où tu devrais être à la fin d'hier pour tenir l'objectif annuel. La journée en cours compte en bonus.</p>
+      <div class="disc" id="disc"></div>
+    </section>
+
+    <section aria-labelledby="t-ev">
+      <h2 id="t-ev">Registre des événements</h2>
+      <p class="intro muted">Réunions de prière, sièges, livres, retraites de 48 h et dons : chaque événement est noté avec sa date et ses détails.</p>
+      <form class="panel evform" id="evForm">
+        <label class="wide">Type<select id="ev-type"></select></label>
+        <label>Date<input type="date" id="ev-date" required></label>
+        <label class="wide">Détail (titre du livre, bénéficiaire, lieu…)<input type="text" id="ev-note" maxlength="200"></label>
+        <button class="btn" type="submit" id="ev-add">Ajouter</button>
+      </form>
+      <div class="filters" id="evFilters" role="group" aria-label="Filtrer le registre"></div>
+      <div class="evlog" id="evLog"></div>
+    </section>
+
+    <section aria-labelledby="t-exp">
+      <h2 id="t-exp">Exporter mon suivi</h2>
+      <div class="panel">
+        <div class="filters" id="expPeriod" role="group" aria-label="Période">
+          <button type="button" class="chip" data-m="day">Un jour</button>
+          <button type="button" class="chip" data-m="range">Plusieurs jours</button>
+          <button type="button" class="chip" data-m="month">Un mois</button>
+          <button type="button" class="chip" data-m="year">Une année</button>
+        </div>
+        <div class="datenav" id="expPick">
+          <label class="muted" style="font-size:.85rem" id="expDayL">Jour <input type="date" id="exp-day" min="2026-01-01" max="2031-12-31"></label>
+          <label class="muted" style="font-size:.85rem" id="expMonthL">Mois <select id="exp-m" class="sel"></select></label>
+          <label class="muted" style="font-size:.85rem" id="expYearL">Année <select id="exp-y" class="sel"></select></label>
+        </div>
+        <div class="datenav" id="expRange" hidden>
+          <label class="muted" style="font-size:.85rem">Du <input type="date" id="exp-from" min="2026-01-01" max="2031-12-31"></label>
+          <label class="muted" style="font-size:.85rem">au <input type="date" id="exp-to" min="2026-01-01" max="2031-12-31"></label>
+        </div>
+        <p class="muted" id="expDesc" style="font-size:.88rem"></p>
+        <div class="filters" id="expFormat" role="group" aria-label="Format">
+          <button type="button" class="chip" data-f="csv">Tableau (CSV, Excel)</button>
+          <button type="button" class="chip" data-f="txt">Comptes rendus (texte)</button>
+        </div>
+        <p class="muted" style="font-size:.8rem">Le tableau contient une ligne par jour, les totaux et les événements du registre ; le texte reprend le compte rendu WhatsApp de chaque journée remplie.</p>
+        <div class="toolbar"><button class="btn" type="button" id="expGo">Télécharger</button><button class="btn ghost" type="button" id="expCopy" hidden>Copier le texte</button><span class="muted" id="expMsg" style="font-size:.85rem" role="status"></span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
