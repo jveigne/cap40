@@ -572,6 +572,10 @@ const OWNER = 'jeanphi.veigne@gmail.com';
       ['2029','15 assemblées de maison, 4e église'],
       ['2030','20 assemblées de maison, 5e église'],
       ['2031','1000 personnes sous ma responsabilité spirituelle']]},
+    {id:'dis',title:'12 disciples engagés',target:'Cible : 12 disciples avec le même engagement que moi, avant 2030',ms:[
+      ['2027','4 disciples engagés'],
+      ['2028','8 disciples engagés'],
+      ['2029','12 disciples avec le même engagement que moi']]},
     {id:'sl',title:'Acheter une salle',target:'Cible : salle achetée, louée en priorité à l\'Église de Paris',ms:[
       ['2027','Montage SCI et plan de financement validés'],
       ['2028','Salle identifiée, compromis signé'],
@@ -584,7 +588,13 @@ const OWNER = 'jeanphi.veigne@gmail.com';
       ['2028','Session pilote avec un premier groupe'],
       ['2029','Module complet : supports, exercices, témoignages'],
       ['2030','Module enregistré et enseigné dans les assemblées'],
-      ['2031','Livre de témoignage prêt à publier']]}
+      ['2031','Livre de témoignage prêt à publier']]},
+    {id:'don',title:'Équipe de donateurs pour les œuvres de ZTF',target:'Cible : une équipe qui donne 5 000 € par mois d\'ici 2030 pour le recouvrement des œuvres de ZTF, indépendamment du CA de JEXCELLENCE',ms:[
+      ['2027','Premiers donateurs réunis, fonctionnement de l\'équipe posé, 1 000 € / mois'],
+      ['2028','2 500 € / mois donnés par l\'équipe'],
+      ['2029','4 000 € / mois donnés par l\'équipe'],
+      ['2030','5 000 € / mois atteints'],
+      ['2031','Équipe autonome, avec ses propres responsables']]}
 ,
     {id:'nat',wide:true,title:'Nationalité française',target:'Cible : française au plus tard en mai 2031',ms:[
       ['2026','Carte de résident obtenue'],
