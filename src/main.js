@@ -1,10 +1,9 @@
 import './style.css';
-import { createClient } from '@supabase/supabase-js';
+import { sb, saveCookie, clearCookie } from './auth.js';
 
-const SB_URL = import.meta.env.VITE_SUPABASE_URL;
-const SB_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-const sb = SB_URL && SB_KEY ? createClient(SB_URL, SB_KEY) : null;
 const TABLE = 'suivi_docs';
+// Seul ce compte peut modifier ; tout autre compte connecté (avec un code que j'ai transmis) est en lecture seule.
+const OWNER = 'jeanphi.veigne@gmail.com';
 
 (function(){
   'use strict';
@@ -25,7 +24,7 @@ const TABLE = 'suivi_docs';
 
   /* ================= Stockage (db privé, sinon ce navigateur) ================= */
   var CACHE='cap40-data';
-  var S={mode:'local',docs:{},col:null,timers:{},inflight:{},dirty:{}};
+  var S={mode:'local',docs:{},col:null,timers:{},inflight:{},dirty:{},ro:!!sb}; // ro : lecture seule tant que le compte n'est pas identifié
   try{S.docs=JSON.parse(localStorage.getItem(CACHE)||'{}')||{};}catch(e){S.docs={};}
   try{ // reprise des coches de la première version
     var old=JSON.parse(localStorage.getItem('cap40-jalons')||'null');
@@ -34,6 +33,7 @@ const TABLE = 'suivi_docs';
   function cache(){try{localStorage.setItem(CACHE,JSON.stringify(S.docs));}catch(e){}}
   function doc(id){return S.docs[id]||(S.docs[id]={});}
   function save(id){
+    if(S.ro)return; // lecture seule : rien n'est enregistré
     cache();
     if(S.mode!=='db')return;
     setSync('wait');
@@ -54,34 +54,41 @@ const TABLE = 'suivi_docs';
   function setSync(state,msg){
     var el=document.getElementById('sync');
     el.className='sync '+(state||'');
-    el.textContent=msg||(state==='ok'?'Synchronisé sur ton compte':state==='wait'?'Enregistrement…':S.mode==='db'?'Synchronisé sur ton compte':'Enregistré dans ce navigateur uniquement');
+    el.textContent=msg||(S.ro&&S.uid&&state!=='err'?'Lecture seule : progression de Jean Philippe':state==='ok'?'Synchronisé sur ton compte':state==='wait'?'Enregistrement…':S.mode==='db'?'Synchronisé sur ton compte':'Enregistré dans ce navigateur uniquement');
   }
 
-  /* ---- Connexion Supabase (lien magique par e-mail) ---- */
+  /* ---- Connexion Supabase (code à usage unique, voir login.html) ---- */
+  function toLogin(){
+    clearCookie();
+    location.replace('/login.html?next='+encodeURIComponent(location.pathname+location.search+location.hash));
+  }
   function renderAuth(user){
     var bar=document.getElementById('authbar');
     if(!sb){bar.innerHTML='<span class="muted">Mode local : les données restent dans ce navigateur. Configure Supabase pour les synchroniser.</span>';return;}
-    if(user){
-      bar.innerHTML='<span class="muted">Connecté : <b class="who"></b></span><button type="button" class="btn ghost small" id="logout">Se déconnecter</button>';
-      bar.querySelector('.who').textContent=user.email||'';
-      document.getElementById('logout').onclick=function(){sb.auth.signOut();};
-      return;
-    }
-    bar.innerHTML='<form id="loginForm" class="toolbar"><label for="loginEmail" class="muted">Connexion</label><input class="txt" type="email" id="loginEmail" required placeholder="ton e-mail" autocomplete="email"><button class="btn small" type="submit">Recevoir le lien de connexion</button><span class="muted" id="loginMsg" role="status"></span></form>';
-    document.getElementById('loginForm').onsubmit=function(e){
-      e.preventDefault();
-      var email=document.getElementById('loginEmail').value.trim(), msg=document.getElementById('loginMsg');
-      msg.textContent='Envoi…';
-      sb.auth.signInWithOtp({email:email,options:{emailRedirectTo:window.location.origin}}).then(function(res){
-        msg.textContent=res.error?('Erreur : '+res.error.message):'Lien envoyé. Ouvre l\'e-mail sur cet appareil.';
-      });
+    if(!user){bar.innerHTML='';return;}
+    bar.innerHTML='<span class="muted">Connecté : <b class="who"></b>'+(S.ro?' <span class="tag">Lecture seule</span>':'')+'</span><button type="button" class="btn ghost small" id="logout">Se déconnecter</button>';
+    bar.querySelector('.who').textContent=user.email||'';
+    document.getElementById('logout').onclick=function(){
+      sb.auth.signOut().finally(function(){try{localStorage.removeItem(CACHE);}catch(e){} toLogin();});
     };
+  }
+
+  /* ---- Lecture seule : on verrouille tout ce qui modifie les données ---- */
+  var EDITABLE='#goals input[type=checkbox], #dayPanel .ctl input, #dayPanel .ctl button, #f-n, #prereqBtn, #disc [data-fast], #evForm input, #evForm select, #evForm button, #evLog [data-del]';
+  function lockUI(){
+    Array.prototype.forEach.call(document.querySelectorAll(EDITABLE),function(el){if(!el.disabled)el.disabled=true;});
+  }
+  function applyReadOnly(){
+    document.body.classList.toggle('ro',S.ro);
+    if(!S.ro)return;
+    lockUI();
+    if(!S.lockObs){S.lockObs=new MutationObserver(lockUI);S.lockObs.observe(document.body,{childList:true,subtree:true});}
   }
   async function pull(first){
     var res=await sb.from(TABLE).select('id,data');
     if(res.error){setSync('err','Lecture impossible : '+res.error.message);return;}
     S.mode='db';
-    if(first&&!res.data.length){ // premier usage du compte : on remonte ce qui existe dans ce navigateur
+    if(first&&!res.data.length&&!S.ro){ // premier usage du compte : on remonte ce qui existe dans ce navigateur
       Object.keys(S.docs).forEach(function(id){if(Object.keys(S.docs[id]).length)save(id);});
       if(!anyPending())setSync('ok'); renderAll(); return;
     }
@@ -92,7 +99,8 @@ const TABLE = 'suivi_docs';
   }
   function startSync(user){
     if(S.uid===user.id)return;
-    S.uid=user.id; renderAuth(user); pull(true);
+    S.uid=user.id; S.ro=(user.email||'').toLowerCase()!==OWNER;
+    applyReadOnly(); renderAuth(user); pull(true);
     if(!S.listening){
       S.listening=true;
       window.addEventListener('focus',function(){if(S.uid&&!anyPending())pull(false);});
@@ -102,8 +110,8 @@ const TABLE = 'suivi_docs';
   async function connect(){
     if(!sb){renderAuth(null);setSync('','Enregistré dans ce navigateur uniquement');return;}
     sb.auth.onAuthStateChange(function(event,session){
-      if(session&&session.user){setTimeout(function(){startSync(session.user);},0);}
-      else{S.uid=null;S.mode='local';renderAuth(null);setSync('','Non connecté : enregistré dans ce navigateur');}
+      if(session&&session.user){saveCookie(session);setTimeout(function(){startSync(session.user);},0);}
+      else toLogin(); // plus de session : retour à la page de connexion
     });
   }
 

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1f3a8a">
+<meta name="robots" content="noindex">
+<title>Connexion · Cap sur mes 40 ans</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap">
+</head>
+<body>
+<main class="wrap login">
+  <div class="panel login-card">
+    <h1>Cap sur mes 40 ans</h1>
+    <p class="muted" id="loginIntro">Cet espace est privé. Indique ton e-mail pour demander un code d'accès.</p>
+
+    <form id="stepEmail" class="login-form" hidden>
+      <label for="email">Ton e-mail</label>
+      <input class="txt" type="email" id="email" required autocomplete="email" placeholder="prenom@exemple.fr">
+      <button class="btn" type="submit">Demander un code</button>
+    </form>
+
+    <form id="stepCode" class="login-form" hidden>
+      <p id="codeInfo"></p>
+      <label for="code">Code reçu</label>
+      <input class="txt" type="text" id="code" required inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" placeholder="123456">
+      <button class="btn" type="submit">Entrer</button>
+      <button class="btn ghost small" type="button" id="back">Changer d'e-mail</button>
+    </form>
+
+    <p class="muted" id="msg" role="status"></p>
+  </div>
+</main>
+<script type="module" src="/src/login.js"></script>
+</body>
+</html>

@@ -61,6 +61,19 @@ Chaque `git push` sur `main` redéploie l'application. Les variables `VITE_` son
 
 Tu peux aussi déployer en ligne de commande : `npx vercel`, puis `npx vercel --prod`.
 
+## Accès privé : moi en écriture, mes invités en lecture
+
+- Le plan n'est servi qu'aux personnes connectées : `middleware.js` (Vercel) vérifie la session Supabase et renvoie sinon vers `login.html`.
+- Sur `login.html`, la personne saisit son e-mail. Le code de connexion ne lui est **pas** envoyé : il arrive sur `jeanphi.veigne@gmail.com` (fonction `supabase/email-hook.sql`). Je le lui transmets si j'accepte.
+- Mon compte modifie tout ; les autres comptes sont en lecture seule (interface verrouillée et règles RLS de `supabase/schema.sql`).
+- Retirer un accès : Supabase → **Authentication → Users** → supprimer le compte.
+
+Réglages Supabase nécessaires :
+1. Exécuter `supabase/schema.sql`, puis `supabase/email-hook.sql` (voir les étapes Resend en tête du fichier).
+2. **Authentication → Hooks** : *Send Email hook*, type Postgres, fonction `public.cap40_send_email`.
+3. **Authentication → Sign In / Providers** : *Allow new users to sign up* activé, *Confirm email* activé, connexions anonymes désactivées.
+4. **Email** : *Email OTP Expiration* à `86400` (24 h, le temps de transmettre le code).
+
 ## Comment les données sont rangées
 
 La table `suivi_docs` contient une ligne JSON par « document » et par utilisateur :

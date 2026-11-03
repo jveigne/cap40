@@ -1,11 +1,22 @@
-# Default ignored files
-/shelf/
-/.idea/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Ignored default folder with query files
-/queries/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
+# Dépendances et build
+node_modules/
+dist/
+
+# Variables d'environnement (clés) : seul le modèle est versionné
 .env*
+!.env.example
+
+# Vercel
+.vercel/
+
+# Éditeurs et système
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Réglages locaux de Claude Code
+.claude/settings.local.json
+
+# Journaux
+*.log

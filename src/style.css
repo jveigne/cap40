@@ -221,3 +221,17 @@ textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:8
 html,body{margin:0}
 .authbar{padding-block:14px 0;font-size:.85rem;min-height:30px}
 .authbar .who{font-weight:600;color:var(--ink)}
+
+/* ---- Lecture seule (personne invitée) ---- */
+body.ro #evForm, body.ro #evLog .del{display:none}
+body.ro :disabled{cursor:default}
+body.ro #goals input:disabled, body.ro #dayPanel .ctl :disabled, body.ro #disc :disabled{opacity:1}
+
+/* ---- Page de connexion ---- */
+.login{min-height:100svh;display:grid;place-items:center;padding-block:32px}
+.login-card{width:min(100%,420px);display:grid;gap:14px}
+.login-card h1{font-size:1.7rem}
+.login-form{display:grid;gap:10px}
+.login-form label{font-weight:600;font-size:.9rem}
+.login-form .txt{width:100%}
+#code{font-family:var(--f-mono);font-size:1.3rem;letter-spacing:.2em}
